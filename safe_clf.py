@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 import cvxpy as cp
 
+#get a demo dataset, you can use your own dataset
 def read_data(filename="rea.mat"):
     mat = sio.loadmat(filename)
     train_x = mat["train_X"]  # 8096 instances * 256  features
@@ -35,6 +36,7 @@ def split(train_x, train_y, n_labels=100):
     return x_sup, y_sup, x_unsup, y_unsup
 
 
+#obatin baseline supervised prediction with supervised data only
 def baseline_predict(sup_x, sup_y, test_x):
     """This is a  1NN classifier with euclidean distance measure.
 
@@ -55,7 +57,7 @@ def baseline_predict(sup_x, sup_y, test_x):
 
     return baseline_prediction
 
-
+#obtain ssl precitions, it is just a demo, you can choose base learner by your self.
 def fit_estimator(sup_x, sup_y, unsup_x, test_x, n_neighbors=3, metric='minkowski'):
     """Provide a ssl methods according to self-training
 
@@ -98,6 +100,7 @@ def fit_estimator(sup_x, sup_y, unsup_x, test_x, n_neighbors=3, metric='minkowsk
     return prediction
 
 
+#SafeW
 def fit_pred(candidate_prediction=None, baseline_prediction=None):
     """
 
